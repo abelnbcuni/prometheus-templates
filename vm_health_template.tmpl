@@ -1,0 +1,7 @@
+{{ define "vm_health_subject.tmpl" }} 
+[{{ .Status | toUpper }}{{ if eq .Status "firing" }}:{{ .Alerts.Firing | len }}{{ end }}]-
+{{- .GroupLabels.alertname }},{{ if eq .GroupLabels.alertname "BOSH_System_VM_Down" }}{{ .CommonLabels.bosh_job_name }}/{{ .CommonLabels.bosh_job_index }},{{ .CommonLabels.bosh_job_ip }},{{ end }}
+{{- .CommonLabels.environment }},
+{{- .CommonLabels.service }},
+{{- .CommonLabels.severity | toUpper }}
+{{ end }}
